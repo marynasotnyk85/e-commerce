@@ -22,7 +22,7 @@ const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
 
   return (
     <div className="flex-col">
-      <div className="flex-1 space-y-4 mt-8 mr-8">
+      <div className="flex-1 space-y-4 mt-8 mr-8 ml-4">
         <BillboardClient data={formattedBillboards} />
       </div>
     </div>
