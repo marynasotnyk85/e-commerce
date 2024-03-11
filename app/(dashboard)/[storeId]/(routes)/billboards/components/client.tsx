@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { BillboardColumn, columns } from "./columns";
 import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
+import ChildComponent from "./childComponent";
+import { useState } from "react";
 
 interface BillboardClientProps {
   data: BillboardColumn[];
@@ -17,6 +19,12 @@ interface BillboardClientProps {
 export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
+
+  const [receivedData, setReceivedData] = useState<string | null>(null);
+  //Callback function to receive data from child
+  const receivedDataFromChild = (data: string) => {
+    setReceivedData(data);
+  };
 
   return (
     <>
@@ -32,6 +40,9 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
           Add New
         </Button>
       </div>
+      <Separator />
+      <ChildComponent sendDataToParent={receivedDataFromChild} />
+      <p> {receivedData}</p>
       <Separator />
       <DataTable searchKey="label" columns={columns} data={data} />
       <Heading title="API" description="API calls for Billboards" />
